@@ -20,7 +20,8 @@
     background: #0C0E10;
     height: 100vh;
     display: grid;
-    grid-template-rows: 300px 200px auto;
+    /* width: 20%; */
+    grid-template-rows: 350px 200px auto;
     position: sticky;
     top: 0px;
     left: 0px;
@@ -85,9 +86,10 @@ a {
 
 #main_section {
     background: #111315;
-    width: 99%;
+    width: 80%;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
+    /* overflow-y: scroll; */
 }
 
 #navbar {
@@ -97,6 +99,9 @@ a {
     gap: 10px;
     padding: 5px 15px;
     height: 60px;
+    position: sticky !important;
+    top: 0;
+    right: 0;
 }
 
 #search {
@@ -179,9 +184,11 @@ a {
     align-items: center;
     padding: 5px;
 }
-.card_text p{
+
+.card_text p {
     font-weight: 400;
 }
+
 .card_text i {
     color: rgb(84, 83, 83);
     font-size: 32px;
