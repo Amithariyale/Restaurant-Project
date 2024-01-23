@@ -2,18 +2,21 @@ const foodItems = document.getElementById("food_items");
 let foodData = []; //initialising foodData array to hold fetched data.
 
 // getMenu function
-function getMenu() {
-  return fetch(
-    "https://raw.githubusercontent.com/saksham-accio/f2_contest_3/main/food.json"
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      foodData = data;
-      showMenu(foodData);
-    })
-    .catch((e) => console.log(e));
+async function getMenu() {
+  try {
+    const responce = await fetch(
+      "https://raw.githubusercontent.com/saksham-accio/f2_contest_3/main/food.json"
+    );
+    const data = await responce.json();
+    showMenu(data);
+    const data2 = await takeOrder();
+    const data3 = await orderPrep(data2);
+    const data4 = await payOrder(data3);
+    thankYouFnc();
+  } catch (err) {
+    console.log(err);
+  }
 }
-
 
 // showMenu function to map the foodData on HTML page.
 function showMenu(data) {
@@ -51,7 +54,6 @@ function takeOrder() {
   });
 }
 
-
 // orderPrep function to prep the order.
 function orderPrep() {
   return new Promise((resolve, reject) => {
@@ -61,7 +63,6 @@ function orderPrep() {
     }, 1500);
   });
 }
-
 
 // payOrder function to make  payment.
 function payOrder(orderStatus) {
@@ -73,20 +74,22 @@ function payOrder(orderStatus) {
   });
 }
 
-
 // Function to display thank you message when order confirmed.
 function thankYouFnc() {
   alert("Thank you for eating with us today!");
 }
 
 // Chain promises to handle the entire process.
-getMenu()
-  .then(() => takeOrder())
-  .then((order) => orderPrep(order))
-  .then((orderStatus) => payOrder(orderStatus))
-  .then((orderStatus) => {
-    if (orderStatus.paid) {
-      thankYouFnc();
-    }
-  })
-  .catch((err) => console.log(err));
+getMenu();
+// .then(() => takeOrder())
+// .then((order) => orderPrep(order))
+// .then((orderStatus) => payOrder(orderStatus))
+// .then((orderStatus) => {
+//   if (orderStatus.paid) {
+//     thankYouFnc();
+//   }
+// })
+// .catch((err) => console.log(err));
+
+
+
